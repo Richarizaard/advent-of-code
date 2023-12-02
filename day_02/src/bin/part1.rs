@@ -9,6 +9,12 @@ struct Entries {
     entries: Vec<Entry>,
 }
 
+impl From<Vec<Entry>> for Entries {
+    fn from(entries: Vec<Entry>) -> Self {
+        Self { entries }
+    }
+}
+
 impl Entries {
     fn add(&mut self, other: Entry) {
         self.entries.push(other)
@@ -37,10 +43,13 @@ struct Entry {
 }
 
 fn is_game_possible(game: &str) -> bool {
-    let mut key: Entries = Entries::default();
-    key.add(Entry { count: 12, color: "red".to_string() });
-    key.add(Entry { count: 13, color: "green".to_string() });
-    key.add(Entry { count: 14, color: "blue".to_string() });
+    let key: Entries = Entries::from(
+        vec![
+            Entry { count: 12, color: "red".to_string() },
+            Entry { count: 13, color: "green".to_string() },
+            Entry { count: 14, color: "blue".to_string() }
+        ]
+    );
 
     let mut parsed_entries: Entries = Entries::default();
 
