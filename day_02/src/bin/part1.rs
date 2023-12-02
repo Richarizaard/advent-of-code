@@ -19,7 +19,8 @@ impl Entries {
     fn add(&mut self, other: Entry) {
         self.entries.push(other)
     }
-    fn validate(&self, other: &Vec<Entry>) -> bool {
+    // Super weird putting it here, but I wanted to work on constructing functions for types
+    fn is_game_possible(&self, other: &Vec<Entry>) -> bool {
         for key_entry in &self.entries {
             let color_entries: Vec<&Entry> = other
                 .iter()
@@ -42,7 +43,32 @@ struct Entry {
     color: String,
 }
 
-fn is_game_possible(game: &str) -> bool {
+// standalone function to check if a game is possible
+// fn is_game_possible(other: &Vec<Entry>) -> bool {
+//     let keys: Entries = Entries::from(
+//         vec![
+//             Entry { count: 12, color: "red".to_string() },
+//             Entry { count: 13, color: "green".to_string() },
+//             Entry { count: 14, color: "blue".to_string() }
+//         ]
+//     );
+
+//     for key in keys.entries {
+//         let color_entries: Vec<&Entry> = other
+//             .iter()
+//             .filter(|&e| e.color == key.color)
+//             .collect();
+//         for other_entry in color_entries {
+//             // Any instance in which we go above our threshold, we return false
+//             if key.count < other_entry.count {
+//                 return false;
+//             }
+//         }
+//     }
+//     return true;
+// }
+
+fn parse_game(game: &str) -> bool {
     let key: Entries = Entries::from(
         vec![
             Entry { count: 12, color: "red".to_string() },
@@ -66,7 +92,7 @@ fn is_game_possible(game: &str) -> bool {
             });
         }
     }
-    return key.validate(&parsed_entries.entries);
+    return key.is_game_possible(&parsed_entries.entries);
 }
 
 fn process(_input: &str) -> u16 {
@@ -80,7 +106,7 @@ fn process(_input: &str) -> u16 {
             .and_then(|s| s.trim_end_matches(":").parse::<u16>().ok())
             .unwrap();
 
-        if is_game_possible(game) {
+        if parse_game(game) {
             possible_game_ids.push(id);
         }
     }
