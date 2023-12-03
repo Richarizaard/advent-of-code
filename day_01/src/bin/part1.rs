@@ -13,12 +13,11 @@ fn process(_input: &str) -> String {
             let first = iter.next().expect("should be a valid number");
             let last = iter.last();
 
-            (
-                match last {
-                    Some(val) => format!("{first}{val}").parse::<u32>(),
-                    None => format!("{first}{first}").parse::<u32>(),
-                }
-            ).expect("should also be a valid number")
+            (match last {
+                Some(val) => format!("{first}{val}").parse::<u32>(),
+                None => format!("{first}{first}").parse::<u32>(),
+            })
+            .expect("should also be a valid number")
         })
         .sum::<u32>();
 
