@@ -3,4 +3,15 @@
 members = [
     "day_01",
     "day_02",
+    "day_03",
+    "day_04",
 ]
+
+[cargo-new]
+vcs = "none"
+
+[alias]     # command aliases
+b = "build"
+c = "check"
+t = "test"
+r = "run"
