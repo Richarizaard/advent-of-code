@@ -17,14 +17,11 @@ fn parse_race(input: &str) -> Vec<Race> {
 
     let time_values: String = lines[0].split_whitespace().skip(1).collect();
     let distance_values: String = lines[1].split_whitespace().skip(1).collect();
+
     races.push(Race {
         time: time_values.parse::<u64>().unwrap(),
         distance: distance_values.parse::<u64>().unwrap(),
     });
-
-    // for (time, distance) in time_values.into_iter().zip(distance_values.into_iter()) {
-    //     races.push(Race { time, distance });
-    // }
 
     races
 }
