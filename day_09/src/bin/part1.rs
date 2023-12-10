@@ -6,7 +6,6 @@ fn main() {
 
 fn process(_input: &str) -> i64 {
     let lines: Vec<&str> = _input.lines().collect::<Vec<&str>>();
-
     let mut total = 0;
 
     for line in lines {
@@ -21,9 +20,7 @@ fn process(_input: &str) -> i64 {
         let mut window_start: usize = 0;
         let mut seq_idx: usize = 0;
 
-        let mut all_zeros: bool = false;
-
-        while !all_zeros {
+        while !sequence[seq_idx].iter().all(|&num| num == 0) {
             let mut diff_seq: Vec<i64> = vec![];
 
             for window_end in 1..sequence[seq_idx].len() {
@@ -34,11 +31,6 @@ fn process(_input: &str) -> i64 {
 
                 window_start += 1;
             }
-
-            if diff_seq.iter().all(|&num| num == 0) {
-                all_zeros = true;
-            }
-
             sequence.push(diff_seq);
             window_start = 0; // reset window
             seq_idx += 1; // increment seq idx
