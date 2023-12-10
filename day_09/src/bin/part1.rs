@@ -6,7 +6,7 @@ fn main() {
 
 fn process(_input: &str) -> i64 {
     let lines: Vec<&str> = _input.lines().collect::<Vec<&str>>();
-    let mut sequence: Vec<Vec<i64>> = vec![];
+
     let mut total = 0;
 
     for line in lines {
@@ -15,6 +15,7 @@ fn process(_input: &str) -> i64 {
             .map(|s| s.parse::<i64>().unwrap())
             .collect::<Vec<i64>>();
 
+        let mut sequence: Vec<Vec<i64>> = vec![];
         sequence.push(nums);
 
         let mut window_start: usize = 0;
@@ -48,9 +49,6 @@ fn process(_input: &str) -> i64 {
             let last = *seq.last().unwrap();
             total += last;
         }
-
-        // reset sequence vector
-        sequence = vec![];
     }
 
     total

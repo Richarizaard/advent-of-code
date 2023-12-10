@@ -27,7 +27,6 @@ fn process(_input: &str) -> i64 {
 
             for window_end in 1..sequence[seq_idx].len() {
                 let curr_seq: Vec<i64> = sequence[seq_idx].clone();
-                // dbg!(&curr_seq[window_end], &curr_seq[window_start]);
                 let diff = curr_seq[window_end] - curr_seq[window_start];
                 diff_seq.push(diff);
 
