@@ -27,7 +27,7 @@ fn process(_input: &str) -> i64 {
 
             for window_end in 1..sequence[seq_idx].len() {
                 let curr_seq: Vec<i64> = sequence[seq_idx].clone();
-                dbg!(&curr_seq[window_end], &curr_seq[window_start]);
+                // dbg!(&curr_seq[window_end], &curr_seq[window_start]);
                 let diff = curr_seq[window_end] - curr_seq[window_start];
                 diff_seq.push(diff);
 
@@ -43,14 +43,17 @@ fn process(_input: &str) -> i64 {
             seq_idx += 1; // increment seq idx
         }
 
-        // Add up the last indexes
+        dbg!(&sequence);
+        // Subtract all the first indexes
+        let mut calc_first = 0;
         for seq in sequence.iter().rev() {
-            let last = *seq.last().unwrap();
-            total += last;
+            let first = *seq.first().unwrap();
+            calc_first = first - calc_first;
         }
 
         // reset sequence vector
         sequence = vec![];
+        total += calc_first
     }
 
     total
@@ -65,6 +68,6 @@ mod tests {
         let input = "0 3 6 9 12 15
         1 3 6 10 15 21
         10 13 16 21 30 45";
-        assert_eq!(114, process(input));
+        assert_eq!(2, process(input));
     }
 }
